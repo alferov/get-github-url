@@ -5,7 +5,7 @@
 ## Install
 
 ```
-$ npm install --save get-github-url
+$ npm install get-github-url --save
 ```
 
 ## Usage
