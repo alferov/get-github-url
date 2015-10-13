@@ -17,5 +17,7 @@ describe('get-github-url', function() {
     expect(getGithubUrl({ url: 'git@github.com:facebook/react.git' }))
       .to.be.equal(expected);
 
+    expect(getGithubUrl({ url: 'github.com/facebook/react' }))
+      .to.be.equal(expected);
   });
 });
