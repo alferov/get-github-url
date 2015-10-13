@@ -4,6 +4,7 @@ var expect = chai.expect;
 var getGithubUrl = require('../index.js');
 var expected = 'https://github.com/facebook/react';
 var expectedSsh = 'git@github.com:facebook/react.git';
+var expectedCloning = 'https://github.com/facebook/react.git';
 
 describe('get-github-url', function() {
   it('should throw an error if url is not a string', function() {
@@ -20,6 +21,23 @@ describe('get-github-url', function() {
 
     expect(getGithubUrl({ url: 'github.com/facebook/react' }))
       .to.be.equal(expected);
+  });
+
+  it('should return valid https url for cloning', function() {
+    expect(getGithubUrl({
+      url: 'facebook/react',
+      cloning: true
+    })).to.be.equal(expectedCloning);
+
+    expect(getGithubUrl({
+      url: 'git@github.com:facebook/react.git',
+      cloning: true
+    })).to.be.equal(expectedCloning);
+
+    expect(getGithubUrl({
+      url: 'github.com/facebook/react',
+      cloning: true
+    })).to.be.equal(expectedCloning);
   });
 
   it('should return valid ssh url', function() {
