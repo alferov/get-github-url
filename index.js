@@ -1,5 +1,4 @@
 'use strict';
-var isString = require('is-string');
 var ghParser = require('parse-github-url');
 /**
  * getGithubUrl
@@ -25,7 +24,7 @@ module.exports = function getGithubUrl(options) {
   var startOfLine = isSsh ? 'git@github.com:' : 'https://github.com/';
   var endOfLine = (isSsh || options.cloning) ? '.git' : '';
 
-  if (!isString(url)) {
+  if (typeof url !== 'string' || !url.length) {
     throw TypeError('URL must be a string');
   }
 

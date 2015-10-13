@@ -32,7 +32,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "is-string": "^1.0.4",
     "parse-github-url": "^0.1.1"
   }
 }
