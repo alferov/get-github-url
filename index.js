@@ -12,8 +12,7 @@ var ghParser = require('parse-github-url');
 // There is an issue of parse-github-url: if url starts with "github", it's
 // considered as git username
 var isStartedWithoutProt = function(string) {
-  var pattern = /^github/;
-  return pattern.test(string);
+  return /^github/.test(string);
 };
 
 var addProtocol = function(url) {
@@ -22,7 +21,9 @@ var addProtocol = function(url) {
 
 module.exports = function getGithubUrl(options) {
   var url = options.url;
-  var startLine = options.protocol === 'ssh' ? 'git@github.com' : 'https://github.com/';
+  var isSsh = options.protocol === 'ssh' ? true : false;
+  var startOfLine = isSsh ? 'git@github.com:' : 'https://github.com/';
+  var endOfLine = (isSsh || options.cloning) ? '.git' : '';
 
   if (!isString(url)) {
     throw TypeError('URL must be a string');
@@ -34,5 +35,5 @@ module.exports = function getGithubUrl(options) {
 
   var parsed = ghParser(url);
 
-  return startLine + parsed.repopath;
+  return startOfLine + parsed.repopath + endOfLine;
 };
