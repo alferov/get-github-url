@@ -13,52 +13,52 @@ describe('get-github-url', function() {
   });
 
   it('should return valid https url', function() {
-    expect(getGithubUrl({ url: 'facebook/react' }))
+    expect(getGithubUrl('facebook/react'))
       .to.be.equal(expected);
 
-    expect(getGithubUrl({ url: 'git@github.com:facebook/react.git' }))
+    expect(getGithubUrl('git@github.com:facebook/react.git'))
       .to.be.equal(expected);
 
-    expect(getGithubUrl({ url: 'github.com/facebook/react' }))
+    expect(getGithubUrl('github.com/facebook/react'))
       .to.be.equal(expected);
   });
 
   it('should return valid https url for cloning', function() {
-    expect(getGithubUrl({
-      url: 'facebook/react',
-      cloning: true
-    })).to.be.equal(expectedCloning);
+    expect(getGithubUrl(
+      'facebook/react',
+      { cloning: true }
+    )).to.be.equal(expectedCloning);
 
-    expect(getGithubUrl({
-      url: 'git@github.com:facebook/react.git',
-      cloning: true
-    })).to.be.equal(expectedCloning);
+    expect(getGithubUrl(
+      'git@github.com:facebook/react.git',
+      { cloning: true }
+    )).to.be.equal(expectedCloning);
 
-    expect(getGithubUrl({
-      url: 'github.com/facebook/react',
-      cloning: true
-    })).to.be.equal(expectedCloning);
+    expect(getGithubUrl(
+      'github.com/facebook/react',
+      { cloning: true }
+    )).to.be.equal(expectedCloning);
   });
 
   it('should return valid ssh url', function() {
-    expect(getGithubUrl({
-      url: 'facebook/react',
-      protocol: 'ssh'
-    })).to.be.equal(expectedSsh);
+    expect(getGithubUrl(
+      'facebook/react',
+      { protocol: 'ssh' }
+    )).to.be.equal(expectedSsh);
 
-    expect(getGithubUrl({
-      url: expected,
-      protocol: 'ssh'
-    })).to.be.equal(expectedSsh);
+    expect(getGithubUrl(
+      expected,
+      { protocol: 'ssh' }
+    )).to.be.equal(expectedSsh);
 
-    expect(getGithubUrl({
-      url: 'git@github.com:facebook/react.git',
-      protocol: 'ssh'
-    })).to.be.equal(expectedSsh);
+    expect(getGithubUrl(
+      'git@github.com:facebook/react.git',
+      { protocol: 'ssh' }
+    )).to.be.equal(expectedSsh);
 
-    expect(getGithubUrl({
-      url: 'github.com/facebook/react',
-      protocol: 'ssh'
-    })).to.be.equal(expectedSsh);
+    expect(getGithubUrl(
+      'github.com/facebook/react',
+      { protocol: 'ssh' }
+    )).to.be.equal(expectedSsh);
   });
 });

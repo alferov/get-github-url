@@ -1,6 +1,6 @@
 # get-github-url
 
-> Get github URL (https or ssh) based on passed arguments
+> Get the full github URL (https or ssh) based on passed arguments
 
 ## Install
 
