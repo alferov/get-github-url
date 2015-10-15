@@ -1,7 +1,7 @@
 {
   "name": "get-github-url",
   "version": "1.0.0",
-  "description": "Get github URL (https or ssh) based on passed arguments",
+  "description": "Get full GitHub URL (https or ssh) based on passed arguments",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter nyan",
