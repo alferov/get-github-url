@@ -5,60 +5,51 @@ var getGithubUrl = require('../index.js');
 var expected = 'https://github.com/facebook/react';
 var expectedSsh = 'git@github.com:facebook/react.git';
 var expectedCloning = 'https://github.com/facebook/react.git';
+var urls = [
+  'facebook/react',
+  'git@github.com:facebook/react.git',
+  'github.com/facebook/react',
+  'https://github.com/facebook/react.git'
+];
+var options;
+
 
 describe('get-github-url', function() {
-  it('should throw an error if url is not a string', function() {
-    expect(getGithubUrl.bind(null, { url: {} }))
-      .to.throw(/must be a string/);
+  describe('error handling', function() {
+    it('should throw an error if url is not a string', function() {
+      expect(getGithubUrl.bind(null, {}))
+        .to.throw(/must be a string/);
+    });
   });
 
-  it('should return valid https url', function() {
-    expect(getGithubUrl('facebook/react'))
-      .to.be.equal(expected);
-
-    expect(getGithubUrl('git@github.com:facebook/react.git'))
-      .to.be.equal(expected);
-
-    expect(getGithubUrl('github.com/facebook/react'))
-      .to.be.equal(expected);
+  describe('with a standart set of options', function() {
+    urls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be valid', function () {
+        expect(getGithubUrl(url)).to.be.equal(expected);
+      });
+    });
   });
 
-  it('should return valid https url for cloning', function() {
-    expect(getGithubUrl(
-      'facebook/react',
-      { cloning: true }
-    )).to.be.equal(expectedCloning);
-
-    expect(getGithubUrl(
-      'git@github.com:facebook/react.git',
-      { cloning: true }
-    )).to.be.equal(expectedCloning);
-
-    expect(getGithubUrl(
-      'github.com/facebook/react',
-      { cloning: true }
-    )).to.be.equal(expectedCloning);
+  describe('with cloning option enabled', function() {
+    before(function() {
+      options = { cloning: true };
+    });
+    urls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be valid', function () {
+        expect(getGithubUrl(url, options)).to.be.equal(expectedCloning);
+      });
+    });
   });
 
-  it('should return valid ssh url', function() {
-    expect(getGithubUrl(
-      'facebook/react',
-      { protocol: 'ssh' }
-    )).to.be.equal(expectedSsh);
-
-    expect(getGithubUrl(
-      expected,
-      { protocol: 'ssh' }
-    )).to.be.equal(expectedSsh);
-
-    expect(getGithubUrl(
-      'git@github.com:facebook/react.git',
-      { protocol: 'ssh' }
-    )).to.be.equal(expectedSsh);
-
-    expect(getGithubUrl(
-      'github.com/facebook/react',
-      { protocol: 'ssh' }
-    )).to.be.equal(expectedSsh);
+  describe('with protocol option equals to ssh', function() {
+    before(function() {
+      options = { protocol: 'ssh' };
+    });
+    urls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be valid', function () {
+        expect(getGithubUrl(url, options)).to.be.equal(expectedSsh);
+      });
+    });
   });
+
 });
