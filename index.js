@@ -1,14 +1,17 @@
 'use strict';
 var ghParser = require('parse-github-url');
+var isGhUrl = require('is-github-url');
 
-// There is an issue of parse-github-url: if url starts without protocol, it's
-// considered as a git username
-var isStartedWithoutProt = function(string) {
-  return /^github.com\//.test(string);
+var hasProtocol = function(string) {
+  return /^\.*\//.test(string);
 };
 
 var addProtocol = function(url, protocol) {
-  return url.replace(/^github.com\//, protocol);
+  return url.replace(/^(?:git|https?|git@)?(?:\:\/\/)?github.com(\/|:)/, protocol);
+};
+
+var isUsernameRepoPair = function(string) {
+  return /(?:[\w\.-]+)\/(?:[\w\.-]+)/.test(string);
 };
 
 /**
@@ -36,7 +39,11 @@ module.exports = function getGithubUrl(input, options) {
     throw TypeError('URL must be a string');
   }
 
-  if (isStartedWithoutProt(input)) {
+  if (!isGhUrl(input) && !isUsernameRepoPair(input)) {
+    return null;
+  }
+
+  if (!hasProtocol(input)) {
     input = addProtocol(input, startOfLine);
   }
 
