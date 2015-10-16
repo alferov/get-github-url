@@ -3,15 +3,19 @@ var ghParser = require('parse-github-url');
 var isGhUrl = require('is-github-url');
 
 var hasProtocol = function(string) {
-  return /^\.*\//.test(string);
+  return /^(?:git(?!hub)|https?|git@).*github.com/.test(string);
 };
 
-var addProtocol = function(url, protocol) {
-  return url.replace(/^(?:git|https?|git@)?(?:\:\/\/)?github.com(\/|:)/, protocol);
+// Replace all invalid protocols, slashes, hostnames to valid ones
+var replacify = function(url, hostname) {
+  return url.replace(
+    /^(?:git|https?|git@)?(?:\:\/\/|:|\/\/)?github.com(\/|:)/,
+    hostname
+  );
 };
 
-var isUsernameRepoPair = function(string) {
-  return /(?:[\w\.-]+)\/(?:[\w\.-]+)/.test(string);
+var isNotNameRepoPair = function(string) {
+  return /(?=github.com)(?:[\w\.-]+)\/(?:[\w\.-]+)/.test(string);
 };
 
 /**
@@ -32,22 +36,26 @@ var isUsernameRepoPair = function(string) {
 module.exports = function getGithubUrl(input, options) {
   options = options || {};
   var isSsh = options.protocol === 'ssh' ? true : false;
-  var startOfLine = isSsh ? 'git@github.com:' : 'https://github.com/';
-  var endOfLine = (isSsh || options.cloning) ? '.git' : '';
+  var hostname = isSsh ? 'git@github.com:' : 'https://github.com/';
+  var gitDirectory = (isSsh || options.cloning) ? '.git' : '';
 
   if (typeof input !== 'string' || !input.length) {
     throw TypeError('URL must be a string');
   }
 
-  if (!isGhUrl(input) && !isUsernameRepoPair(input)) {
-    return null;
+  if (!hasProtocol(input)) {
+    input = replacify(input, hostname);
   }
 
-  if (!hasProtocol(input)) {
-    input = addProtocol(input, startOfLine);
+  if (!isGhUrl(input) && isNotNameRepoPair(input)) {
+    return null;
   }
 
   var parsed = ghParser(input);
 
-  return startOfLine + parsed.repopath + endOfLine;
+  if (!parsed.repopath) {
+    return null;
+  }
+
+  return hostname + parsed.repopath + gitDirectory;
 };

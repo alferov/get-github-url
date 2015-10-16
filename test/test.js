@@ -9,7 +9,14 @@ var urls = [
   'facebook/react',
   'git@github.com:facebook/react.git',
   'github.com/facebook/react',
-  'https://github.com/facebook/react.git'
+  'https://github.com/facebook/react.git',
+  '//github.com/facebook/react.git',
+  ':github.com/facebook/react.git'
+];
+var invalidUrls = [
+  'google.ca',
+  'facebook.github.io',
+  'github.com/facebook'
 ];
 var options;
 
@@ -28,12 +35,19 @@ describe('get-github-url', function() {
         expect(getGithubUrl(url)).to.be.equal(expected);
       });
     });
+
+    invalidUrls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be invalid', function () {
+        expect(getGithubUrl(url)).to.be.null;
+      });
+    });
   });
 
   describe('with cloning option enabled', function() {
     before(function() {
       options = { cloning: true };
     });
+
     urls.forEach(function(url) {
       it('URL' + ' - ' + url + ' should be valid', function () {
         expect(getGithubUrl(url, options)).to.be.equal(expectedCloning);
@@ -45,9 +59,15 @@ describe('get-github-url', function() {
     before(function() {
       options = { protocol: 'ssh' };
     });
+
     urls.forEach(function(url) {
       it('URL' + ' - ' + url + ' should be valid', function () {
         expect(getGithubUrl(url, options)).to.be.equal(expectedSsh);
+      });
+    });
+    invalidUrls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be invalid', function () {
+        expect(getGithubUrl(url, options)).to.be.null;
       });
     });
   });
