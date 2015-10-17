@@ -1,6 +1,6 @@
 {
   "name": "get-github-url",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get a full GitHub URL (https or ssh) based on incomplete URL or user/repo path",
   "main": "index.js",
   "scripts": {
