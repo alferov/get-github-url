@@ -1,7 +1,7 @@
 {
   "name": "get-github-url",
   "version": "1.0.0",
-  "description": "Get full GitHub URL (https or ssh) based on incomplete URL or user/repo path",
+  "description": "Get a full GitHub URL (https or ssh) based on incomplete URL or user/repo path",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter nyan",
@@ -9,7 +9,6 @@
   },
   "repository": "alferov/get-github-url",
   "keywords": [
-    "gh",
     "github",
     "git",
     "url",

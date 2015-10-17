@@ -1,6 +1,6 @@
 # get-github-url
 
-> Get full GitHub URL (https or ssh) based on incomplete URL or user/repo path
+> Get a full GitHub URL (https or ssh) based on an incomplete URL or a user/repo path
 
 ## Installation
 ```
@@ -41,16 +41,16 @@ getGithubUrl('facebook/react', { cloning: true, ssh: true });
 
 ## API
 ### `getGithubUrl(input, options)`
-Get full GitHub URL (https or ssh) based on incomplete URL or user/repo path
+Get a full GitHub URL (https or ssh) based on incomplete URL or a user/repo path
 
 #### Params
-- **String** `input`: URL or user/repo path
+- **String** `input`: a URL or a user/repo path
 - **Object** `options`: An object containing the following fields:
-  - `protocol` (String): Set protocol type. Possible values: `ssh` (https is used by default)
-  - `cloning` (Boolean): Make URL acceptable for `git clone` command
+  - `protocol` (String): A format of returned URL. Possible values: `ssh` (https is used by default)
+  - `cloning` (Boolean): Make a URL acceptable for `git clone` command
 
 #### Return
-- **String** | **Null**: Valid GitHub URL or null
+- **String** | **Null**: A valid GitHub URL or null
 
 ## License
 MIT © [Philipp Alferov](https://github.com/alferov)

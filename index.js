@@ -25,12 +25,12 @@ var isNotNameRepoPair = function(string) {
  * @name getGithubUrl
  * @function
  *
- * @param {String} input URL or user/repo path
+ * @param {String} input a URL or a user/repo path
  * @param {Object} options An object containing the following fields:
- *  - `protocol` {String}: Set protocol type for returning URL. Possible values: `ssh`
+ *  - `protocol` {String}: A format of returned URL. Possible values: `ssh`
  * (https is used by default)
  *  - `cloning` {Boolean}: Make URL acceptable for `git clone` command
- * @return {String|Null} Valid GitHub URL or null
+ * @return {String|Null} A valid GitHub URL or null
  */
 
 module.exports = function getGithubUrl(input, options) {
