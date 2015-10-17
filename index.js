@@ -20,17 +20,17 @@ var isNotNameRepoPair = function(string) {
 
 /**
  * getGithubUrl
- * Get full GitHub URL (https or ssh) based on passed arguments
+ * Get full GitHub URL (https or ssh) based on incomplete URL or user/repo path
  *
  * @name getGithubUrl
  * @function
  *
- * @param {String} input A string to be validated
+ * @param {String} input URL or user/repo path
  * @param {Object} options An object containing the following fields:
- *  - `includeGhPages` (Boolean): Add github.io domain to
- * the matching pattern
- *
- * @return
+ *  - `protocol` {String}: Set protocol type for returning URL. Possible values: `ssh`
+ * (https is used by default)
+ *  - `cloning` {Boolean}: Make URL acceptable for `git clone` command
+ * @return {String|Null} Valid GitHub URL or null
  */
 
 module.exports = function getGithubUrl(input, options) {
