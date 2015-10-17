@@ -1,6 +1,5 @@
 'use strict';
 var chai = require('chai');
-var extend = require('shallow-object-extend');
 var expect = chai.expect;
 var getGithubUrl = require('../index.js');
 var expected = 'https://github.com/facebook/react';
