@@ -1,5 +1,6 @@
 'use strict';
 var chai = require('chai');
+var extend = require('shallow-object-extend');
 var expect = chai.expect;
 var getGithubUrl = require('../index.js');
 var expected = 'https://github.com/facebook/react';
@@ -65,11 +66,17 @@ describe('get-github-url', function() {
         expect(getGithubUrl(url, options)).to.be.equal(expectedSsh);
       });
     });
-    invalidUrls.forEach(function(url) {
-      it('URL' + ' - ' + url + ' should be invalid', function () {
-        expect(getGithubUrl(url, options)).to.be.null;
+  });
+
+  describe('with protocol option equals to ssh and cloning enabled', function() {
+    before(function() {
+      options = { protocol: 'ssh', cloning: true };
+    });
+
+    urls.forEach(function(url) {
+      it('URL' + ' - ' + url + ' should be valid', function () {
+        expect(getGithubUrl(url, options)).to.be.equal(expectedSsh);
       });
     });
   });
-
 });
