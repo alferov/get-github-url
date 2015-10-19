@@ -15,11 +15,11 @@ var urls = [
 ];
 var invalidUrls = [
   'google.ca',
+  'https://google.ca',
   'facebook.github.io',
   'github.com/facebook'
 ];
 var options;
-
 
 describe('get-github-url', function() {
   describe('error handling', function() {
