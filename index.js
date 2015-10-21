@@ -20,7 +20,8 @@ var isNotNameRepoPair = function(string) {
 
 /**
  * getGithubUrl
- * Get full GitHub URL (https or ssh) based on incomplete URL or user/repo path
+ * Get a complete (or a canonical) GitHub repository URL (https or ssh)
+ * from an incomplete URL or a user/repo path
  *
  * @name getGithubUrl
  * @function

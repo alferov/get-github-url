@@ -1,6 +1,6 @@
-# get-github-url
+# get-github-url [![Build Status](https://travis-ci.org/alferov/get-github-url.svg?branch=master)](https://travis-ci.org/alferov/get-github-url)
 
-> Get a full GitHub URL (https or ssh) based on an incomplete URL or a user/repo path
+> Get a complete (or a canonical) GitHub repository URL (https or ssh) from an incomplete URL or a user/repo path
 
 ## Installation
 ```
@@ -41,7 +41,7 @@ getGithubUrl('facebook/react', { cloning: true, ssh: true });
 
 ## API
 ### `getGithubUrl(input, options)`
-Get a full GitHub URL (https or ssh) based on incomplete URL or a user/repo path
+Get a complete (or a canonical) GitHub repository URL (https or ssh) from an incomplete URL or a user/repo path
 
 #### Params
 - **String** `input`: a URL or a user/repo path
