@@ -1,6 +1,6 @@
 {
   "name": "get-github-url",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Get a complete (or a canonical) GitHub repository URL (https or ssh) from an incomplete URL or a user/repo path",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,6 @@
   "license": "MIT",
   "dependencies": {
     "is-github-url": "^1.0.0",
-    "parse-github-url": "^0.1.1"
+    "parse-github-url": "^0.2.1"
   }
 }
