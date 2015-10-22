@@ -48,7 +48,7 @@ module.exports = function getGithubUrl(input, options) {
     input = replacify(input, hostname);
   }
 
-  if (!isGhUrl(input) && isNotNameRepoPair(input)) {
+  if (!isGhUrl(input, { repository: true }) && isNotNameRepoPair(input)) {
     return null;
   }
 
