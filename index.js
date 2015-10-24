@@ -9,7 +9,7 @@ var hasProtocol = function(string) {
 // Replace all invalid protocols, slashes, hostnames to valid ones
 var replacify = function(url, hostname) {
   return url.replace(
-    /^(?:git|https?|git@)?(?:\:\/\/|:|\/\/)?github.com(\/|:)/,
+    /^.*?github.com(\/|:)/,
     hostname
   );
 };
